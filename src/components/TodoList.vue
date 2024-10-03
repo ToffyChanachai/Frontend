@@ -227,7 +227,7 @@ export default {
   methods: {
     async fetchTodos() {
       try {
-        const response = await axios.get("http://127.0.0.1:3333/todos");
+        const response = await axios.get("http://192.168.1.8:3333/todos");
         this.todos = response.data;
       } catch (error) {
         console.error("Error fetching todos:", error);
@@ -237,7 +237,7 @@ export default {
     async addTodo() {
       try {
         const response = await axios.post(
-          "http://127.0.0.1:3333/todos",
+          "http://192.168.1.8:3333/todos",
           this.newTodo,
         );
         this.todos.push(response.data);
@@ -259,7 +259,7 @@ export default {
 
     async markComplete(id) {
       try {
-        await axios.patch(`http://127.0.0.1:3333/todos/${id}/complete`);
+        await axios.patch(`http://192.168.1.8:3333/todos/${id}/complete`);
         const todo = this.todos.find((t) => t.id === id);
         todo.completed = true;
       } catch (error) {
@@ -268,7 +268,7 @@ export default {
     },
     async markIncomplete(id) {
       try {
-        await axios.patch(`http://127.0.0.1:3333/todos/${id}/incomplete`);
+        await axios.patch(`http://192.168.1.8:3333/todos/${id}/incomplete`);
         const todo = this.todos.find((t) => t.id === id);
         todo.completed = false;
       } catch (error) {
@@ -291,7 +291,7 @@ export default {
     async updateTodo() {
       try {
         const response = await axios.put(
-          `http://127.0.0.1:3333/todos/${this.editTodo.id}`,
+          `http://192.168.1.8:3333/todos/${this.editTodo.id}`,
           this.editTodo,
         );
         const index = this.todos.findIndex((t) => t.id === this.editTodo.id);
@@ -314,7 +314,7 @@ export default {
 
     async deleteTodo(id) {
       try {
-        await axios.delete(`http://127.0.0.1:3333/todos/${id}`);
+        await axios.delete(`http://192.168.1.8:3333/todos/${id}`);
         this.todos = this.todos.filter((todo) => todo.id !== id);
         this.closeDeleteModal(); 
       } catch (error) {
